@@ -48,10 +48,20 @@ test {
 }
 
 task copyDocker {
-    copy {
-        from 'src/main/docker'
-        into 'build/libs/'
+    doLast {
+        copy {
+            from 'src/main/docker'
+            into 'build/libs/'
+        }
     }
 }
-
 tasks.build.finalizedBy(copyDocker)
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task buildDockerImage(type: DockerBuildImage) {
+    dockerFile = project.file('build/libs/Dockerfile')
+    inputDir = project.projectDir
+    images.add('spring-cloud-eureka-client:1.0')
+}
+
