@@ -25,6 +25,7 @@ ext {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
@@ -45,3 +46,12 @@ dependencyManagement {
 test {
     useJUnitPlatform()
 }
+
+task copyDocker {
+    copy {
+        from 'src/main/docker'
+        into 'build/libs/'
+    }
+}
+
+tasks.build.finalizedBy(copyDocker)
