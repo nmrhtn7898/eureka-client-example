@@ -1,6 +1,6 @@
 version: '3'
 networks:
-  config-server_myweb:
+  eureka-server_myweb:
     external: true
 services:
   database2:
@@ -9,19 +9,19 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - config-server_myweb
+      - eureka-server_myweb
     environment:
+      MYSQL_ROOT_PASSWORD: "1234"
       MYSQL_USER: "nuguri"
       MYSQL_PASSWORD: "bom"
       MYSQL_DATABASE: "testdb"
   clientserver2:
     container_name: "clientserver2"
-    image: spring-cloud-eureka-client:1.0
+    image: eureka-client:1.0
     ports:
       - "8001:8001"
     networks:
-      - config-server_myweb
+      - eureka-server_myweb
     environment:
-      RUN_MESSAGE: "HELLO !!"
       DATABASESERVER_PORT: "3306"
 
