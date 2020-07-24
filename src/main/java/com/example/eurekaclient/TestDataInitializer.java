@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-public class ApplicationRunner implements org.springframework.boot.ApplicationRunner {
+public class TestDataInitializer implements org.springframework.boot.ApplicationRunner {
 
     private final OrganizationService organizationService;
 
