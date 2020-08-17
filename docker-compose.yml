@@ -8,8 +8,6 @@ services:
     image: mysql
     ports:
       - "3306:3306"
-    networks:
-      - eureka-server_myweb
     environment:
       MYSQL_ROOT_PASSWORD: "1234"
       MYSQL_USER: "nuguri"
@@ -21,6 +19,7 @@ services:
     ports:
       - "8001:8001"
     networks:
+      - default
       - eureka-server_myweb
     environment:
       DATABASESERVER_PORT: "3306"
